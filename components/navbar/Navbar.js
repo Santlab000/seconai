@@ -1,111 +1,161 @@
+"use client";
+
+import {
+  AppBar,
+  Toolbar,
+  Box,
+  IconButton,
+  Drawer,
+  Button,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+} from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import TranslateIcon from "@mui/icons-material/Translate";
+import MenuIcon from "@mui/icons-material/Menu";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+
+const navLinks = [
+  { label: "Home", href: "/" },
+  { label: "Explore", href: "/explore" },
+  { label: "About", href: "/about" },
+];
+
 const NavBar = () => {
+  const router = useRouter();
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
   return (
     <>
       <AppBar
         position="static"
-        sx={{ backgroundColor: "#1A1A1A", color: "#fff", height: 80 }}
+        sx={{ bgcolor: "background.paper", height: 80 }}
       >
-        <Toolbar>
-          {/* Left Side (Menu Items for larger screens) */}
+        <Toolbar sx={{ height: "100%" }}>
+          {/* Left: nav links (desktop only) */}
           <Box
-            display={{ xs: "none", md: "flex" }}
-            flexGrow={1}
-            alignItems="center"
+            sx={{
+              flex: 1,
+              display: { xs: "none", md: "flex" },
+              alignItems: "center",
+              gap: 1,
+            }}
           >
-            menu data
+            {navLinks.map((link) => (
+              <Button
+                key={link.href}
+                color="inherit"
+                onClick={() => router.push(link.href)}
+              >
+                {link.label}
+              </Button>
+            ))}
           </Box>
 
-
-
-
-
-
-          {/* Centered Logo */}
+          {/* Center: logo */}
           <Box
             onClick={() => router.push("/")}
             sx={{
-              flexGrow: 9000008,
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              marginRight: 28,
+              cursor: "pointer",
             }}
           >
-            <img
-              src="/images/logo2.png" // Replace with your logo's path
-              alt="Logo"
-              style={{
-                height: 60,
-                cursor: "pointer",
-                borderRadius: "50%", // This makes it circular
-                width: 60, // Ensure the width and height are equal to maintain the circular shape
-              }}
+            <Image
+              src="/globe.svg"
+              alt="Seconai logo"
+              width={48}
+              height={48}
+              style={{ borderRadius: "50%" }}
+              priority
             />
           </Box>
 
-
-
-
-
-          {/* Right Side (Search, Notifications, Translate, and Sign In) */}
-          <Box display="flex" alignItems="center">
+          {/* Right: actions */}
+          <Box
+            sx={{
+              flex: 1,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-end",
+            }}
+          >
             <IconButton
-              sx={{ color: "#fff", display: { xs: "none", md: "block" } }}
+              color="inherit"
+              aria-label="search"
+              sx={{ display: { xs: "none", md: "inline-flex" } }}
             >
               <SearchIcon />
             </IconButton>
             <IconButton
-              sx={{ color: "#fff", display: { xs: "none", md: "block" } }}
+              color="inherit"
+              aria-label="notifications"
+              sx={{ display: { xs: "none", md: "inline-flex" } }}
             >
               <NotificationsIcon />
             </IconButton>
             <IconButton
-              sx={{ color: "#fff", display: { xs: "none", md: "block" } }}
+              color="inherit"
+              aria-label="translate"
+              sx={{ display: { xs: "none", md: "inline-flex" } }}
             >
               <TranslateIcon />
             </IconButton>
-            login
-            {/* Hamburger Icon for Small Devices */}
+            <Button
+              variant="contained"
+              color="primary"
+              sx={{ ml: 1, display: { xs: "none", md: "inline-flex" } }}
+            >
+              Login
+            </Button>
+
+            {/* Hamburger (mobile only) */}
             <IconButton
               edge="start"
               color="inherit"
-              aria-label="menu"
-              sx={{ display: { xs: "block", md: "none" } }}
+              aria-label="open menu"
+              onClick={() => setDrawerOpen(true)}
+              sx={{ display: { xs: "inline-flex", md: "none" } }}
             >
               <MenuIcon />
             </IconButton>
           </Box>
         </Toolbar>
-
-        {/* Drawer for Small Devices */}
-        <Drawer anchor="left">
-          <Box
-            sx={{
-              width: 250,
-              backgroundColor: "#1A1A1A",
-              height: "100%",
-              color: "#fff",
-            }}
-            role="presentation"
-          >
-            <Box sx={{ padding: 2, borderTop: "1px solid #333" }}>
-              <Button
-                variant="contained"
-                fullWidth
-                sx={{
-                  backgroundColor: "#00796B",
-                  "&:hover": { backgroundColor: "#005A4F" },
-                }}
-              >
-                Sign In
-              </Button>
-            </Box>
-
-            <List>menu items</List>
-            {/* Login Button at the Bottom */}
-          </Box>
-        </Drawer>
       </AppBar>
+
+      {/* Mobile navigation drawer */}
+      <Drawer
+        anchor="left"
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+      >
+        <Box
+          sx={{ width: 250, bgcolor: "background.paper", height: "100%" }}
+          role="presentation"
+          onClick={() => setDrawerOpen(false)}
+        >
+          <List>
+            {navLinks.map((link) => (
+              <ListItem key={link.href} disablePadding>
+                <ListItemButton onClick={() => router.push(link.href)}>
+                  <ListItemText primary={link.label} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+          <Box sx={{ p: 2, borderTop: "1px solid #333" }}>
+            <Button variant="contained" color="primary" fullWidth>
+              Login
+            </Button>
+          </Box>
+        </Box>
+      </Drawer>
     </>
   );
 };
