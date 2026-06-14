@@ -68,11 +68,11 @@ const NavBar = () => {
             }}
           >
             <Image
-              src="/globe.svg"
-              alt="Seconai logo"
-              width={48}
-              height={48}
-              style={{ borderRadius: "50%" }}
+              src="/logo.png"
+              alt="SeconAI logo"
+              width={64}
+              height={64}
+              style={{ borderRadius: 8 }}
               priority
             />
           </Box>
