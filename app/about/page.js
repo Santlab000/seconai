@@ -1,5 +1,5 @@
 import Navbar from "@/components/navbar/Navbar";
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, Typography, Link } from "@mui/material";
 
 export const metadata = {
   title: "About | Seconai",
@@ -13,8 +13,17 @@ export default function About() {
         <Typography variant="h3" gutterBottom>
           About
         </Typography>
-        <Typography color="text.secondary">
-          This page is coming soon.
+        <Typography gutterBottom>
+          SeconAI is a technology company that deals in AI automation.
+        </Typography>
+        <Typography gutterBottom>
+          <strong>Contact person:</strong> Santosh Labade
+        </Typography>
+        <Typography gutterBottom>
+          <strong>Email:</strong>{" "}
+          <Link href="mailto:seconai.official@gmail.com" color="primary">
+            seconai.official@gmail.com
+          </Link>
         </Typography>
       </Container>
     </Box>
