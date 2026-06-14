@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 120" width="420" height="120" role="img" aria-label="SeconAI">
+  <defs>
+    <linearGradient id="sGrad" x1="20" y1="18" x2="80" y2="102" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#16234E"/>
+      <stop offset="0.55" stop-color="#1E40AF"/>
+      <stop offset="1" stop-color="#3B82F6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Icon mark -->
+  <path
+    d="M76 40
+       C76 26 60 22 46 26
+       C32 30 30 46 46 52
+       C62 58 70 64 70 76
+       C70 92 52 96 36 90
+       C30 88 25 84 22 79"
+    fill="none"
+    stroke="url(#sGrad)"
+    stroke-width="17"
+    stroke-linecap="round"
+    stroke-linejoin="round"/>
+
+  <!-- Wordmark -->
+  <text x="112" y="78"
+        font-family="'Geist', 'Poppins', 'Segoe UI', system-ui, sans-serif"
+        font-size="58" font-weight="600" letter-spacing="2"
+        fill="#E8EDF7">seconai</text>
+
+  <!-- Tagline -->
+  <text x="114" y="100"
+        font-family="'Geist', 'Segoe UI', system-ui, sans-serif"
+        font-size="13" font-weight="500" letter-spacing="6"
+        fill="#7C89A6">INTELLIGENCE. AUTOMATED.</text>
+</svg>
