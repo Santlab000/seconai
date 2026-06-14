@@ -38,7 +38,10 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Install dependencies
-        run: npm ci
+        # Use `npm install` rather than `npm ci`: the Windows-generated
+        # lockfile omits some Linux-only optional deps of sharp
+        # (@emnapi/*), which makes strict `npm ci` fail on the runner.
+        run: npm install --no-audit --no-fund
 
       - name: Build static export
         run: npm run build
