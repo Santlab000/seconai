@@ -12,8 +12,11 @@ const theme = createTheme({
       paper: "#1A1A1A",
     },
     primary: {
-      main: "#00796B",
-      dark: "#005A4F",
+      // Brand blue, matching the logo's navy-to-blue gradient
+      main: "#2563EB",
+      dark: "#1E40AF",
+      light: "#3B82F6",
+      contrastText: "#ffffff",
     },
     text: {
       primary: "#ffffff",
@@ -21,6 +24,22 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: "var(--font-geist-sans), Roboto, sans-serif",
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        // Filled brand buttons use the logo's navy-to-blue gradient
+        containedPrimary: {
+          backgroundImage: "linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%)",
+          boxShadow: "none",
+          "&:hover": {
+            backgroundImage:
+              "linear-gradient(135deg, #16234E 0%, #2563EB 100%)",
+            boxShadow: "none",
+          },
+        },
+      },
+    },
   },
 });
 
